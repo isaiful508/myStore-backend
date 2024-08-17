@@ -39,11 +39,11 @@ async function run() {
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    app.post('/signup', async (req, res) => await signUp(req, res));
-    app.post('/login', async (req, res) => await login(req, res));
-    app.post('/role', async (req, res) => await checkRole(req, res));
-    app.get('/check_admin', jwtVerify, async(req, res) => await checkRole(req, res));
-    app.post('/products', jwtVerify, async(req, res) => await postProducts(req, res));
+    // app.post('/signup', async (req, res) => await signUp(req, res));
+    // app.post('/login', async (req, res) => await login(req, res));
+    // app.post('/role', async (req, res) => await checkRole(req, res));
+    // app.get('/check_admin', jwtVerify, async(req, res) => await checkRole(req, res));
+    app.post('/products', async(req, res) => await postProducts(req, res));
     app.get('/products', async(req, res) => await getProducts(req, res));
   } finally {
     // Ensures that the client will close when you finish/error
