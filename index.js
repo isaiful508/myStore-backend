@@ -12,7 +12,7 @@ const { getProducts } = require('./controllers/getProducts');
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: ['https://phero-job-task.web.app', 'http://localhost:5173'],
+    origin: ['http://localhost:5173'],
     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
 }));
 
