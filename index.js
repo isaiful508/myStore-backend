@@ -6,12 +6,18 @@ require('dotenv').config()
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const port = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: ["http://localhost:5173",
-    "https://finaltask2024.netlify.app/"],
-  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
-}));
+// app.use(cors({
+//   origin: ["http://localhost:5173",
+//     "https://finaltask2024.netlify.app"],
+//   methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+// }));
+const corsOptions = {
+  origin : ['http://localhost:5173','https://finaltask2024.netlify.app' ],
+  credentials : true,
+  optionSuccessStatus : 200
+}
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Server is running');
@@ -67,10 +73,6 @@ async function run() {
         const result = await productsCollection.find(query).sort(sortCriteria).skip(startIndex).limit(8).toArray();
         const dataCount = await productsCollection.countDocuments(query);
         const totalPage = Math.ceil(dataCount / 8);
-
-        console.log('MongoDB Result:', result);
-        console.log('Data Count:', dataCount);
-        console.log('Total Pages:', totalPage);
 
         res.send({ result, totalPage });
 
